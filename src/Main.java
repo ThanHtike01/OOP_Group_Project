@@ -32,22 +32,29 @@ public class Main {
                     break;
 
                 case 3:
-                    String borrowId = InputHandler.getStringInput("Enter item ID to borrow: ");
-                    String borrowerId = InputHandler.getStringInput("Enter your member ID: ");
+                String borrowId;
+                String borrowerId;
+                    do{
+                        borrowId = InputHandler.getStringInput("Enter item ID to borrow: ");
+                        borrowerId = InputHandler.getStringInput("Enter your member ID: ");
+                        if(!LibraryManager.isNumeric(borrowId) || !LibraryManager.isNumeric(borrowerId)){
+                            System.out.println("ID must be numeric. Try again.");
+                        }
+                    } while(!LibraryManager.isNumeric(borrowId)|| !LibraryManager.isNumeric(borrowerId));
                     manager.borrowItem(borrowId, borrowerId);
                     break;
-                    // try {
-                    //     String borrowId = InputHandler.getStringInput("Enter item ID to borrow: ");
-                    //     String borrowerId = InputHandler.getStringInput("Enter your member ID: ");
-                    //     manager.borrowItem(borrowId, borrowerId);
-                    // } catch (NumberFormatException e) {
-                    //     System.out.println("Invalid input. IDs must be numbers.");
-                    // }
-                    // break;
+                    
 
                 case 4:
-                    String returnId = InputHandler.getStringInput("Enter item ID to return: ");
-                    String returnerId = InputHandler.getStringInput("Enter your member ID: ");
+                    String returnId;
+                    String returnerId;
+                    do {
+                        returnId = InputHandler.getStringInput("Enter item ID to return: ");
+                        returnerId = InputHandler.getStringInput("Enter your member ID: ");
+                        if(!LibraryManager.isNumeric(returnId) || !LibraryManager.isNumeric(returnerId)){
+                            System.out.println("ID must be numeric. Try again.");
+                        }
+                    } while(!LibraryManager.isNumeric(returnId) || !LibraryManager.isNumeric(returnerId));
                     manager.returnItem(returnId, returnerId);
                     break;
 
@@ -65,12 +72,24 @@ public class Main {
                     break;
 
                 case 8:
-                    String delBookId = InputHandler.getStringInput("Enter book ID to delete: ");
+                    String delBookId; 
+                    do {
+                        delBookId = InputHandler.getStringInput("Enter book ID to delete: ");
+                        if(!LibraryManager.isNumeric(delBookId)){
+                            System.out.println("ID must be numeric. Try again.");
+                        }
+                    }while (!LibraryManager.isNumeric(delBookId));
                     manager.deleteBook(delBookId);
                     break;
 
                 case 9:
-                    String delMemberId = InputHandler.getStringInput("Enter member ID to delete: ");
+                    String delMemberId;
+                    do{
+                        delMemberId = InputHandler.getStringInput("Enter member ID to delete: ");
+                        if(!LibraryManager.isNumeric(delMemberId)){
+                            System.out.println("ID must be numeric. Try again.");
+                        }
+                    }while(!LibraryManager.isNumeric(delMemberId));
                     manager.deleteMember(delMemberId);
                     break;
 
