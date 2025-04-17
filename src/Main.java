@@ -11,9 +11,9 @@ public class Main {
             System.out.println("4. Return Book");
             System.out.println("5. List All Books");
             System.out.println("6. List All Members");
-            System.out.println("7. Save Data to File");
+            System.out.println("7. Delete Member");
             System.out.println("8. Delete Book");
-            System.out.println("9. Delete Member");
+            System.out.println("9. Save Data to File");
             System.out.println("10. Exit");
 
             int choice = InputHandler.getIntInput("Choose an option: ");
@@ -69,8 +69,14 @@ public class Main {
                     break;
 
                 case 7:
-                    manager.saveData();
-                    System.out.println("Data saved to file.");
+                    String delMemberId;
+                    do {
+                        delMemberId = InputHandler.getStringInput("Enter member ID to delete: ");
+                        if (!LibraryManager.isNumeric(delMemberId)) {
+                            System.out.println("ID must be numeric. Try again.");
+                        }
+                    } while (!LibraryManager.isNumeric(delMemberId));
+                    manager.deleteMember(delMemberId);
                     break;
 
                 case 8:
@@ -85,14 +91,8 @@ public class Main {
                     break;
 
                 case 9:
-                    String delMemberId;
-                    do {
-                        delMemberId = InputHandler.getStringInput("Enter member ID to delete: ");
-                        if (!LibraryManager.isNumeric(delMemberId)) {
-                            System.out.println("ID must be numeric. Try again.");
-                        }
-                    } while (!LibraryManager.isNumeric(delMemberId));
-                    manager.deleteMember(delMemberId);
+                    manager.saveData();
+                    System.out.println("Data saved to file.");
                     break;
 
                 case 10:
