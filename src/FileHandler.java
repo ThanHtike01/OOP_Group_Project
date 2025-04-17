@@ -35,13 +35,13 @@ public class FileHandler {
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
                 String type = parts[0];
-                String id = parts[1];
+                //String id = parts[1];
                 String title = parts[2];
                 boolean available = Boolean.parseBoolean(parts[4]);
 
                 if (type.equals("StoryBook")) {
                     String author = parts[3];
-                    Book sb = new Book(id, title, author);
+                    Book sb = new Book(title, author);
                     if (!available) sb.borrow();
                     items.add(sb);
                 }
@@ -79,9 +79,9 @@ public class FileHandler {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                String memberId = parts[0];
+                //String memberId = parts[0];
                 String name = parts[1];
-                Member member = new Member(memberId, name);
+                Member member = new Member(name);
 
                 for (int i = 2; i < parts.length; i++) {
                     member.borrowItem(parts[i]);

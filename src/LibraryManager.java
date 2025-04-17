@@ -11,7 +11,7 @@ public class LibraryManager {
     }
 
     // Add new items
-    public void addStoryBook(Book book) {
+    public void addBook(Book book) {
         items.add(book);
     }
 
@@ -35,7 +35,8 @@ public class LibraryManager {
             return;
         }
         for (Member member : members) {
-            System.out.println("Member ID: " + member.getMemberId() + ", Name: " + member.getName());
+            System.out.println("Member ID: " + member.getMemberId() + ", Name: " + member.getName() +
+                    ", Borrowed Items: " + member.getBorrowedItems());
         }
     }
 
@@ -107,5 +108,41 @@ public class LibraryManager {
     public void saveData() {
         FileHandler.saveItemsToFile(items);
         FileHandler.saveMembersToFile(members);
+    }
+
+    public void deleteBook(String bookId) {
+        LibraryItem item = findItemById(bookId);
+        if (item == null) {
+            System.out.println("Book not found.");
+            return;
+        }
+
+        if (!item.isAvailable()) {
+            System.out.println("Cannot delete a borrowed book.");
+            return;
+        }
+
+        items.remove(item);
+        System.out.println("Book deleted successfully.");
+    }
+
+    public void deleteMember(String memberId) {
+        Member member = findMemberById(memberId);
+        if (member == null) {
+            System.out.println("Member not found.");
+            return;
+        }
+
+        if (!member.getBorrowedItems().isEmpty()) {
+            System.out.println("Member has borrowed items. Return them first.");
+            return;
+        }
+
+        members.remove(member);
+        System.out.println("Member deleted successfully.");
+    }
+
+    public static boolean isNumeric(String str) {
+        return str.matches("\\d+"); // Accepts only digits (no negative or decimal)
     }
 }

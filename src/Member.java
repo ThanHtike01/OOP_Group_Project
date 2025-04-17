@@ -2,12 +2,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Member {
+    private static int memberCounter = 0;
     private String memberId;
     private String name;
     private List<String> borrowedItems;
 
-    public Member(String memberId, String name) {
-        this.memberId = memberId;
+    public Member(String name) {
+        this.memberId = String.format("%03d", ++memberCounter);
         this.name = name;
         this.borrowedItems = new ArrayList<>();
     }

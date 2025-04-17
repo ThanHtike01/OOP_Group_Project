@@ -1,2 +1,0 @@
-StoryBook,12345,Zaw,YYY,true
-StoryBook,234,ttt,yyy,true

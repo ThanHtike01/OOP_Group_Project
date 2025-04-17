@@ -7,27 +7,28 @@ public class Main {
             System.out.println("\n=== Library Management System ===");
             System.out.println("1. Add Book");
             System.out.println("2. Register Member");
-            System.out.println("3. Borrow Item");
-            System.out.println("4. Return Item");
-            System.out.println("5. List All Items");
+            System.out.println("3. Borrow Book");
+            System.out.println("4. Return Book");
+            System.out.println("5. List All Books");
             System.out.println("6. List All Members");
             System.out.println("7. Save Data to File");
-            System.out.println("8. Exit");
+            System.out.println("8. Delete Book");
+            System.out.println("9. Delete Member");
+            System.out.println("10. Exit");
 
             int choice = InputHandler.getIntInput("Choose an option: ");
 
             switch (choice) {
                 case 1:
-                    String id1 = InputHandler.getStringInput("Enter book ID: ");
                     String title1 = InputHandler.getStringInput("Enter book title: ");
                     String author = InputHandler.getStringInput("Enter author: ");
-                    manager.addStoryBook(new Book(id1, title1, author));
+                    manager.addBook(new Book(title1, author));
                     break;
 
                 case 2:
-                    String memberId = InputHandler.getStringInput("Enter member ID: ");
+                    // String memberId = InputHandler.getStringInput("Enter member ID: ");
                     String name = InputHandler.getStringInput("Enter name: ");
-                    manager.registerMember(new Member(memberId, name));
+                    manager.registerMember(new Member(name));
                     break;
 
                 case 3:
@@ -35,6 +36,14 @@ public class Main {
                     String borrowerId = InputHandler.getStringInput("Enter your member ID: ");
                     manager.borrowItem(borrowId, borrowerId);
                     break;
+                    // try {
+                    //     String borrowId = InputHandler.getStringInput("Enter item ID to borrow: ");
+                    //     String borrowerId = InputHandler.getStringInput("Enter your member ID: ");
+                    //     manager.borrowItem(borrowId, borrowerId);
+                    // } catch (NumberFormatException e) {
+                    //     System.out.println("Invalid input. IDs must be numbers.");
+                    // }
+                    // break;
 
                 case 4:
                     String returnId = InputHandler.getStringInput("Enter item ID to return: ");
@@ -56,8 +65,18 @@ public class Main {
                     break;
 
                 case 8:
+                    String delBookId = InputHandler.getStringInput("Enter book ID to delete: ");
+                    manager.deleteBook(delBookId);
+                    break;
+
+                case 9:
+                    String delMemberId = InputHandler.getStringInput("Enter member ID to delete: ");
+                    manager.deleteMember(delMemberId);
+                    break;
+
+                case 10:
                     int saveOption = InputHandler.getIntInput("Before Exit. 1. Save data.. 2. Don't save data... ");
-                    if(saveOption == 1){
+                    if (saveOption == 1) {
                         manager.saveData();
                     }
                     System.out.println("Goodbye!");
