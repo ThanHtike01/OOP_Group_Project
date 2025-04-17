@@ -4,6 +4,7 @@ import java.util.List;
 public class LibraryManager {
     private List<LibraryItem> items;
     private List<Member> members;
+    private static int itemCounter = 0;
 
     public LibraryManager() {
         items = new ArrayList<>();
@@ -11,8 +12,8 @@ public class LibraryManager {
     }
 
     // Add new items
-    public void addBook(Book book) {
-        items.add(book);
+    public void addBook(LibraryItem item) {
+        items.add(item);
     }
 
     public void registerMember(Member member) {
@@ -109,6 +110,33 @@ public class LibraryManager {
     public void loadData() {
         items = FileHandler.loadItemsFromFile();
         members = FileHandler.loadMembersFromFile();
+
+        int maxId = 0;
+    for (LibraryItem item : items) {
+        try {
+            int id = Integer.parseInt(item.getId());
+            if (id > maxId) {
+                maxId = id;
+            }
+        } catch (NumberFormatException e) {
+            // Ignore non-numeric IDs
+        }
+    }
+    itemCounter = maxId;
+
+    // Also update memberCounter based on highest member ID
+    int maxMemberId = 0;
+    for (Member member : members) {
+        try {
+            int id = Integer.parseInt(member.getMemberId());
+            if (id > maxMemberId) {
+                maxMemberId = id;
+            }
+        } catch (NumberFormatException e) {
+            // Ignore non-numeric IDs
+        }
+    }
+        Member.setMemberCounter(maxMemberId);
     }
 
     public void saveData() {
@@ -150,5 +178,9 @@ public class LibraryManager {
 
     public static boolean isNumeric(String str) {
         return str.matches("\\d+"); // Accepts only digits (no negative or decimal)
+    }
+
+    public static int getNextItemId() {
+        return ++itemCounter;
     }
 }

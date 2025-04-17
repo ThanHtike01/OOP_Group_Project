@@ -32,4 +32,8 @@ public class Member {
     public List<String> getBorrowedItems() {
         return borrowedItems;
     }
+
+    public static void setMemberCounter(int value) {
+        memberCounter = value;
+    }
 }

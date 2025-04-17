@@ -12,7 +12,10 @@ public class FileHandler {
                 String line;
                 if (item instanceof Book) {
                     Book book = (Book) item;
-                    line = "StoryBook," + book.getId() + "," + book.getTitle() + "," + book.getAuthor() + "," + book.isAvailable();
+                    line = "Book," + book.getId() + "," + book.getTitle() + "," + book.getAuthor() + "," + book.isAvailable();
+                } else if (item instanceof SchoolBook) {
+                    SchoolBook sb = (SchoolBook) item;
+                    line = "SchoolBook," + sb.getId() + "," + sb.getTitle() + "," + sb.getSubject() + "," + sb.isAvailable();
                 } else {
                     continue;
                 }
@@ -35,15 +38,20 @@ public class FileHandler {
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
                 String type = parts[0];
-                //String id = parts[1];
+                String id = parts[1];
                 String title = parts[2];
                 boolean available = Boolean.parseBoolean(parts[4]);
 
-                if (type.equals("StoryBook")) {
+                if (type.equals("Book")) {
                     String author = parts[3];
-                    Book sb = new Book(title, author);
-                    if (!available) sb.borrow();
-                    items.add(sb);
+                    Book book = new Book(id,title, author);
+                    if (!available) book.borrow();
+                    items.add(book);
+                } else if (type.equals("SchoolBook")) {
+                    String subject = parts[3];
+                    SchoolBook schoolBook = new SchoolBook(id,title, subject);
+                    if (!available) schoolBook.borrow();
+                    items.add(schoolBook);
                 }
             }
         } catch (IOException e) {
