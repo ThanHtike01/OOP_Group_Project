@@ -10,12 +10,9 @@ public class FileHandler {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ITEMS_FILE))) {
             for (LibraryItem item : items) {
                 String line;
-                if (item instanceof StoryBook) {
-                    StoryBook sb = (StoryBook) item;
+                if (item instanceof Book) {
+                    Book sb = (Book) item;
                     line = "StoryBook," + sb.getId() + "," + sb.getTitle() + "," + sb.getAuthor() + "," + sb.isAvailable();
-                } else if (item instanceof SchoolBook) {
-                    SchoolBook scb = (SchoolBook) item;
-                    line = "SchoolBook," + scb.getId() + "," + scb.getTitle() + "," + scb.getSubject() + "," + scb.isAvailable();
                 } else {
                     continue;
                 }
@@ -44,14 +41,9 @@ public class FileHandler {
 
                 if (type.equals("StoryBook")) {
                     String author = parts[3];
-                    StoryBook sb = new StoryBook(id, title, author);
+                    Book sb = new Book(id, title, author);
                     if (!available) sb.borrow();
                     items.add(sb);
-                } else if (type.equals("SchoolBook")) {
-                    String subject = parts[3];
-                    SchoolBook scb = new SchoolBook(id, title, subject);
-                    if (!available) scb.borrow();
-                    items.add(scb);
                 }
             }
         } catch (IOException e) {

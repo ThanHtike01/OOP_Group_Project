@@ -11,11 +11,7 @@ public class LibraryManager {
     }
 
     // Add new items
-    public void addStoryBook(StoryBook book) {
-        items.add(book);
-    }
-
-    public void addSchoolBook(SchoolBook book) {
+    public void addStoryBook(Book book) {
         items.add(book);
     }
 

@@ -1,7 +1,7 @@
-public class StoryBook extends LibraryItem {
+public class Book extends LibraryItem {
     private String author;
 
-    public StoryBook(String id, String title, String author) {
+    public Book(String id, String title, String author) {
         super(id, title);
         this.author = author;
     }
@@ -13,7 +13,7 @@ public class StoryBook extends LibraryItem {
     @Override
     public String getDetails() {
         // TODO Auto-generated method stub
-        return "Story Book - ID: " + getId() + ", Title: " + getTitle() + ", Author: " + author;
+        return "Book - ID: " + getId() + ", Title: " + getTitle() + ", Author: " + author;
     }
     
 }
