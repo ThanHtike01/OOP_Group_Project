@@ -19,4 +19,15 @@ public class InputHandler {
         scanner.nextLine(); // consume newline
         return value;
     }
+
+    public static String getValidatedNumericInput(String prompt) {
+        String input;
+        do {
+            input = getStringInput(prompt);
+            if (!LibraryManager.isNumeric(input)) {
+                System.out.println("ID must be numeric. Try again.");
+            }
+        } while (!LibraryManager.isNumeric(input));
+        return input;
+    }
 }
