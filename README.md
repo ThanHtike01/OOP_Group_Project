@@ -22,24 +22,38 @@ This is a Library Management System built using Java. It uses object-oriented pr
 Meanwhile, the compiled output files will be generated in the `bin` folder by default.
 
 src/
-├── Main.java                 // Entry point with interactive menu \n 
-├── LibraryManager.java       // Core logic and data management \n
-├── LibraryItem.java          // Abstract class for library items
-├── Book.java                 // Book class extending LibraryItem
-├── SchoolBook.java           // School-specific book
-├── Member.java               // Member data and borrowing logic
-├── FileHandler.java          // Load/save from text files
-└── InputHandler.java         // Reusable input utilities
+
+├── Main.java                 // Entry point with interactive menu.
+
+├── LibraryManager.java       // Core logic and data management.
+
+├── LibraryItem.java          // Abstract class for library items.
+
+├── Book.java                 // Book class extending LibraryItem.
+
+├── SchoolBook.java           // School-specific book.
+
+├── Member.java               // Member data and borrowing logic.
+
+├── FileHandler.java          // Load/save from text files.
+
+└── InputHandler.java         // Reusable input utilities.
 
 ## How to Run
 
 Prerequisites
-- Java 8 or above installed
+- Java 21 or above installed
 - A terminal or IDE (like IntelliJ, Eclipse, or VS Code)
 
 Run Steps
-- Compile all files: javac *.java
-- Run the program: java Main
+- Compile all files:
+```bash
+javac *.java
+```
+- Run the program:
+```bash
+java Main
+```
 
 ## Sample Menu
 
@@ -57,12 +71,15 @@ Run Steps
 11. Exit
 
 ## File Format
-- items.txt (Books and SchoolBooks)
-Book, ID, Title, Author, isAvailable
-SchoolBook, ID, Title, Subject,isAvailable
+- items.txt (Books and SchoolBooks).
+
+```Book, ID, Title, Author, isAvailable.```
+
+```SchoolBook, ID, Title, Subject,isAvailable.```
 
 - members.txt
-MemberID, Name, BorrowedItemID1, BorrowedItemID2,...
+
+```MemberID, Name, BorrowedItemID1, BorrowedItemID2,...```
 
 
 ## Future Improvements
