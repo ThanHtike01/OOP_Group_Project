@@ -27,6 +27,7 @@ public class LibraryManager {
         for (LibraryItem item : items) {
             System.out.println(item.getDetails() + (item.isAvailable() ? " [Available]" : " [Borrowed]"));
         }
+        System.out.println("Total Books: " + items.size());
     }
 
     public void listMembers() {
@@ -38,6 +39,7 @@ public class LibraryManager {
             System.out.println("Member ID: " + member.getMemberId() + ", Name: " + member.getName() +
                     ", Borrowed Items: " + member.getBorrowedItems());
         }
+        System.out.println("Total Members: " + members.size());
     }
 
     public void borrowItem(String itemId, String memberId) {
@@ -56,10 +58,14 @@ public class LibraryManager {
             System.out.println("Item is already borrowed.");
             return;
         }
+        if (member.getBorrowedItems().size() >= 5) {
+            System.out.println("Borrow limit reached. A member can only borrow up to 5 items.");
+            return;
+        }
 
         item.borrow();
         member.borrowItem(itemId);
-        System.out.println("Item borrowed successfully.");
+        System.out.println(member.getName() + " borrowed \"" + item.getTitle() + "\" successfully.");
     }
 
     public void returnItem(String itemId, String memberId) {
@@ -78,7 +84,7 @@ public class LibraryManager {
 
         item.returnItem();
         member.returnItem(itemId);
-        System.out.println("Item returned successfully.");
+        System.out.println((member.getName() + " returned \"" + item.getTitle() + "\" successfully."));
     }
 
     // Helper methods

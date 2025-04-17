@@ -11,8 +11,8 @@ public class FileHandler {
             for (LibraryItem item : items) {
                 String line;
                 if (item instanceof Book) {
-                    Book sb = (Book) item;
-                    line = "StoryBook," + sb.getId() + "," + sb.getTitle() + "," + sb.getAuthor() + "," + sb.isAvailable();
+                    Book book = (Book) item;
+                    line = "StoryBook," + book.getId() + "," + book.getTitle() + "," + book.getAuthor() + "," + book.isAvailable();
                 } else {
                     continue;
                 }

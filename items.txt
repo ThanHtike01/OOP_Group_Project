@@ -1,0 +1,7 @@
+StoryBook,001,Hamlet,William Shakespeare,true
+StoryBook,002,Romeo and Juliet,William Shakespeare,true
+StoryBook,003,Macbeth,William Shakespeare,true
+StoryBook,004,Hercule Poirot and Miss Marple,Agatha Christie,true
+StoryBook,005,A Tale of Two Cities,Charles Dickens,true
+StoryBook,006,Great Expectations,Charles Dickens,true
+StoryBook,007,David Copperfield,Charles Dickens,true
