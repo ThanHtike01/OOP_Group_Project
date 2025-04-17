@@ -22,8 +22,8 @@ This is a Library Management System built using Java. It uses object-oriented pr
 Meanwhile, the compiled output files will be generated in the `bin` folder by default.
 
 src/
-├── Main.java                 // Entry point with interactive menu
-├── LibraryManager.java       // Core logic and data management
+├── Main.java                 // Entry point with interactive menu \n 
+├── LibraryManager.java       // Core logic and data management \n
 ├── LibraryItem.java          // Abstract class for library items
 ├── Book.java                 // Book class extending LibraryItem
 ├── SchoolBook.java           // School-specific book
