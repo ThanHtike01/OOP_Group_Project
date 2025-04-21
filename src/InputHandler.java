@@ -1,25 +1,39 @@
 import java.util.Scanner;
 
+//To handle console input from the user
 public class InputHandler {
+    // Single shared Scanner instance for consistent input reading
     private static final Scanner scanner = new Scanner(System.in);
 
+    // Gets a line of string input
     public static String getStringInput(String prompt) {
-        System.out.print(prompt);
-        return scanner.nextLine();
+        String input;
+        do {
+            System.out.print(prompt); // Display the prompt to the user
+            input = scanner.nextLine().trim(); // Read the whole line and remove leading/trailing spaces
+        
+            // If the user enters only spaces or presses Enter, input becomes empty
+            // This loop ensures they must enter some visible characters
+            if (input.isEmpty()) {
+                System.out.println("Input cannot be empty. Please try again.");
+            }
+        } while (input.isEmpty()); 
+        return input;
     }
 
+    // Gets a validated integer input
     public static int getIntInput(String prompt) {
-        System.out.print(prompt);
-        while (!scanner.hasNextInt()) {
-            System.out.println("Please enter a valid number.");
-            scanner.next(); // discard invalid input
+        while (true) {
             System.out.print(prompt);
+            String input = scanner.nextLine().trim(); // read full line and trim spaces
+            if (input.matches("\\d+")) { // check if it's all digits
+                return Integer.parseInt(input);
+            }
+            System.out.println("Please enter a valid number.");
         }
-        int value = scanner.nextInt();
-        scanner.nextLine(); // consume newline
-        return value;
     }
 
+    // Gets numeric string input
     public static String getValidatedNumericInput(String prompt) {
         String input;
         do {

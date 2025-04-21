@@ -1,9 +1,15 @@
+// Main class / entry point
 public class Main {
     public static void main(String[] args) {
         LibraryManager manager = new LibraryManager();
         boolean exit = false;
+
+        // Load saved books and members from file
         manager.loadData();
+
+        // Main loop to keep the program running until the user exits
         while (!exit) {
+            //Display the main menu
             System.out.println("\n=== Library Management System ===");
             System.out.println("1. Add Book");
             System.out.println("2. Add School Book");
@@ -23,10 +29,10 @@ public class Main {
                 case 1:
                     String title1 = InputHandler.getStringInput("Enter book title: ");
                     String author = InputHandler.getStringInput("Enter author: ");
-                    String bookId = String.format("%03d", LibraryManager.getNextItemId());
+                    String bookId = String.format("%03d", LibraryManager.getNextItemId()); //Format ID like "001"
                     Book newBook = new Book(bookId, title1, author);
                     manager.addBook(newBook);
-                    System.out.println(newBook.getDetails());
+                    System.out.println(newBook.getDetails()); //Confirm book detail
                     break;
 
                 case 2:
@@ -80,13 +86,20 @@ public class Main {
                     System.out.println("Data saved to file.");
                     break;
 
+                // Exit the program with confirmation on whether to save data
                 case 11:
-                    int saveOption = InputHandler.getIntInput("Before Exit. 1. Save data.. 2. Don't save data... ");
+                int saveOption;
+                do {
+                    saveOption = InputHandler.getIntInput("Before Exit. 1. Save data.. 2. Don't save data... ");
+                    if (saveOption != 1 && saveOption != 2) {
+                        System.out.println("Please enter 1 or 2.");
+                    }
+                } while (saveOption != 1 && saveOption != 2);
                     if (saveOption == 1) {
                         manager.saveData();
                     }
                     System.out.println("Goodbye!");
-                    exit = true;
+                    exit = true; //End the program
                     break;
 
                 default:

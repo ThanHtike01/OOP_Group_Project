@@ -1,11 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
 
+//Core logic handler of the system.
 public class LibraryManager {
-    private List<LibraryItem> items;
-    private List<Member> members;
-    private static int itemCounter = 0;
+    private List<LibraryItem> items; // List to store books and school books
+    private List<Member> members; // List to store members
+    private static int itemCounter = 0; // Used to auto-genarate IDs
 
+    // Constructor initializes empty lists for items and members
     public LibraryManager() {
         items = new ArrayList<>();
         members = new ArrayList<>();
@@ -16,10 +18,12 @@ public class LibraryManager {
         items.add(item);
     }
 
+    // Register new members
     public void registerMember(Member member) {
         members.add(member);
     }
 
+    // List all items with availability status
     public void listItems() {
         if (items.isEmpty()) {
             System.out.println("No items in the library.");
@@ -31,6 +35,7 @@ public class LibraryManager {
         System.out.println("Total Books: " + items.size());
     }
 
+    // List all members with borrowed items
     public void listMembers() {
         if (members.isEmpty()) {
             System.out.println("No members registered.");
@@ -43,6 +48,7 @@ public class LibraryManager {
         System.out.println("Total Members: " + members.size());
     }
 
+    // Allow member to borrow item if conditions are met
     public void borrowItem(String itemId, String memberId) {
         LibraryItem item = findItemById(itemId);
         Member member = findMemberById(memberId);
@@ -69,6 +75,7 @@ public class LibraryManager {
         System.out.println(member.getName() + " borrowed \"" + item.getTitle() + "\" successfully.");
     }
 
+    // Allow a member to return borrowed item
     public void returnItem(String itemId, String memberId) {
         LibraryItem item = findItemById(itemId);
         Member member = findMemberById(memberId);
@@ -89,6 +96,7 @@ public class LibraryManager {
     }
 
     // Helper methods
+    // Finds a library item by its ID 
     private LibraryItem findItemById(String id) {
         for (LibraryItem item : items) {
             if (item.getId().equalsIgnoreCase(id)) {
@@ -98,6 +106,7 @@ public class LibraryManager {
         return null;
     }
 
+    // Finds a member by their ID
     private Member findMemberById(String id) {
         for (Member member : members) {
             if (member.getMemberId().equalsIgnoreCase(id)) {
@@ -107,6 +116,7 @@ public class LibraryManager {
         return null;
     }
 
+    // Load data from files and update ID counters based on highest existing ID
     public void loadData() {
         items = FileHandler.loadItemsFromFile();
         members = FileHandler.loadMembersFromFile();
@@ -139,11 +149,13 @@ public class LibraryManager {
         Member.setMemberCounter(maxMemberId);
     }
 
+    // Save all data to files
     public void saveData() {
         FileHandler.saveItemsToFile(items);
         FileHandler.saveMembersToFile(members);
     }
 
+    //Delete a book only if it is not currently borrowed
     public void deleteBook(String bookId) {
         LibraryItem item = findItemById(bookId);
         if (item == null) {
@@ -160,6 +172,7 @@ public class LibraryManager {
         System.out.println("Book deleted successfully.");
     }
 
+    // Delete a member only if they have no borrowed items
     public void deleteMember(String memberId) {
         Member member = findMemberById(memberId);
         if (member == null) {
@@ -176,10 +189,12 @@ public class LibraryManager {
         System.out.println("Member deleted successfully.");
     }
 
+    //Method used in input validation
     public static boolean isNumeric(String str) {
         return str.matches("\\d+"); // Accepts only digits (no negative or decimal)
     }
 
+    // Returns the next available unique item ID
     public static int getNextItemId() {
         return ++itemCounter;
     }

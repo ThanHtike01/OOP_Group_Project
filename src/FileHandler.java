@@ -1,15 +1,18 @@
 import java.io.*;
 import java.util.*;
 
+// FileHandler handles reading and writing of LibraryItems and Members to file.
 public class FileHandler {
     private static final String ITEMS_FILE = "items.txt";
     private static final String MEMBERS_FILE = "members.txt";
 
-    // Save items to file
+    // Saves all LibraryItems (Book, SchoolBook) to items.txt
     public static void saveItemsToFile(List<LibraryItem> items) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ITEMS_FILE))) {
             for (LibraryItem item : items) {
                 String line;
+
+                // Using instanceof to handle different types
                 if (item instanceof Book) {
                     Book book = (Book) item;
                     line = "Book," + book.getId() + "," + book.getTitle() + "," + book.getAuthor() + "," + book.isAvailable();
@@ -17,7 +20,7 @@ public class FileHandler {
                     SchoolBook sb = (SchoolBook) item;
                     line = "SchoolBook," + sb.getId() + "," + sb.getTitle() + "," + sb.getSubject() + "," + sb.isAvailable();
                 } else {
-                    continue;
+                    continue; // skip unsupported types
                 }
                 writer.write(line);
                 writer.newLine();
@@ -31,6 +34,8 @@ public class FileHandler {
     public static List<LibraryItem> loadItemsFromFile() {
         List<LibraryItem> items = new ArrayList<>();
         File file = new File(ITEMS_FILE);
+
+        // Return empty list if file doesn't exist (first-time run safety)
         if (!file.exists()) return items;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -65,6 +70,7 @@ public class FileHandler {
     public static void saveMembersToFile(List<Member> members) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(MEMBERS_FILE))) {
             for (Member member : members) {
+                // Format: memberId,name,borrowedId1
                 String line = member.getMemberId() + "," + member.getName();
                 for (String borrowedId : member.getBorrowedItems()) {
                     line += "," + borrowedId;
@@ -87,10 +93,11 @@ public class FileHandler {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                //String memberId = parts[0];
+                //String memberId = parts[0]; // Now change to auto-generated internally
                 String name = parts[1];
                 Member member = new Member(name);
 
+                //Add borrowed items back to the member
                 for (int i = 2; i < parts.length; i++) {
                     member.borrowItem(parts[i]);
                 }
