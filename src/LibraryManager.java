@@ -86,7 +86,7 @@ public class LibraryManager {
         }
 
         if (!member.getBorrowedItems().contains(itemId)) {
-            System.out.println("This item was not borrowed by this member.");
+            System.out.println("Item " + item.getId() + " was not borrowed by " + member.getName());
             return;
         }
 
@@ -197,5 +197,17 @@ public class LibraryManager {
     // Returns the next available unique item ID
     public static int getNextItemId() {
         return ++itemCounter;
+    }
+
+    public void showBookList() {
+        System.out.println("Book List");
+        listItems();
+        System.out.println();
+    }
+
+    public void showMemberList() {
+        System.out.println("Member List");
+        listMembers();
+        System.out.println();
     }
 }

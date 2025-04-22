@@ -1,4 +1,9 @@
-Book,001,Hello,Hello2,true
-Book,002,Hi,Hi1,true
-Book,003,Hey,Hey1,true
-SchoolBook,005,DSA,programming,true
+Book,001,The Great Gatsby,F.Scott Fitzgerald,true
+Book,002,To Kill a Mockingbird,Harper Lee,true
+Book,003,War and Peace,Harper Lee,true
+Book,004,Brave New World,Aldous Huxley,true
+Book,005,Wuthering Heights,Emily Bronte,true
+Book,006,The Lord of the Rings,J. R. R. Tolkien,true
+SchoolBook,007,College Algebra,Mathematics,true
+SchoolBook,008,Introduction to Data Science,Data Science,true
+SchoolBook,009,The Principles of UI/UX,User Interface and User Experience Design,true

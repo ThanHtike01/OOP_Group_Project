@@ -52,36 +52,43 @@ public class Main {
                     break;
 
                 case 4:
+                    manager.showBookList();
+                    manager.showMemberList();
                     String borrowId = InputHandler.getValidatedNumericInput("Enter item ID to borrow: ");
                     String borrowerId = InputHandler.getValidatedNumericInput("Enter your member ID: ");
                     manager.borrowItem(borrowId, borrowerId);
                     break;
 
                 case 5:
+                    manager.showMemberList();
                     String returnId = InputHandler.getValidatedNumericInput("Enter item ID to return: ");
                     String returnerId = InputHandler.getValidatedNumericInput("Enter your member ID: ");
                     manager.returnItem(returnId, returnerId);
                     break;
 
                 case 6:
-                    manager.listItems();
+                    manager.showBookList();
                     break;
 
                 case 7:
-                    manager.listMembers();
+                    manager.showMemberList();
                     break;
 
                 case 8:
+                    manager.showMemberList();
                     String delMemberId = InputHandler.getValidatedNumericInput("Enter member ID to delete: ");
                     manager.deleteMember(delMemberId);
                     break;
 
                 case 9:
+                    manager.showBookList();
                     String delBookId = InputHandler.getValidatedNumericInput("Enter book ID to delete: ");
                     manager.deleteBook(delBookId);
                     break;
 
                 case 10:
+                    manager.showBookList();
+                    manager.showMemberList();
                     manager.saveData();
                     System.out.println("Data saved to file.");
                     break;
