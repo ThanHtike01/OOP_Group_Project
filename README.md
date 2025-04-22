@@ -39,6 +39,10 @@ src/
 
 └── InputHandler.java         // Reusable input utilities.
 
+## Class Diagram
+
+![Class Diagram](images/Class%20diagram.png)
+
 ## How to Run
 
 Prerequisites
@@ -86,3 +90,11 @@ java Main
 1. Add search and filter functionality
 2. Implement due dates and overdue logic
 3. Admin/member login system
+
+## Members
+1. Khant Nyi Nyi Aung
+2. Sai Saing Wan
+3. Than Htike Zaw
+4. Sai Aung Kham
+
+---------------------
