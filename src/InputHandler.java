@@ -26,7 +26,7 @@ public class InputHandler {
         while (true) {
             System.out.print(prompt);
             String input = scanner.nextLine().trim(); // read full line and trim spaces
-            if (input.matches("\\d+")) { // check if it's all digits
+            if (isNumeric(input)) { // check if it's all digits
                 return Integer.parseInt(input);
             }
             System.out.println("Please enter a valid number.");
@@ -38,10 +38,15 @@ public class InputHandler {
         String input;
         do {
             input = getStringInput(prompt);
-            if (!LibraryManager.isNumeric(input)) {
+            if (!isNumeric(input)) {
                 System.out.println("ID must be numeric. Try again.");
             }
-        } while (!LibraryManager.isNumeric(input));
+        } while (!isNumeric(input));
         return input;
+    }
+
+    //Method used in input validation
+    public static boolean isNumeric(String str) {
+        return str.matches("\\d+"); // Accepts only digits (no negative or decimal)
     }
 }

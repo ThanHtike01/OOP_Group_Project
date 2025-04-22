@@ -175,11 +175,6 @@ public class LibraryManager {
         System.out.println("Member deleted successfully.");
     }
 
-    //Method used in input validation
-    public static boolean isNumeric(String str) {
-        return str.matches("\\d+"); // Accepts only digits (no negative or decimal)
-    }
-
     // Returns the next available unique item ID
     public static int getNextItemId() {
         return ++itemCounter;

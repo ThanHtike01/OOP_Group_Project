@@ -93,9 +93,9 @@ public class FileHandler {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                //String memberId = parts[0]; // Now change to auto-generated internally
+                String memberId = parts[0]; // Now change to auto-generated internally
                 String name = parts[1];
-                Member member = new Member(name);
+                Member member = new Member(memberId, name);
 
                 //Add borrowed items back to the member
                 for (int i = 2; i < parts.length; i++) {

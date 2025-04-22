@@ -13,6 +13,12 @@ public class Member {
         this.borrowedItems = new ArrayList<>();
     }
 
+    public Member(String memberId, String name){
+        this.memberId = memberId;
+        this.name = name;
+        this.borrowedItems = new ArrayList<>();
+    }
+
     public String getMemberId() {
         return memberId;
     }
