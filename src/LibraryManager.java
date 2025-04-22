@@ -70,13 +70,17 @@ public class LibraryManager {
     }
 
     // Allow a member to return borrowed item
-    public void returnItem(String itemId, String memberId) throws ItemNotFoundException, MemberNotFoundException{
+    public void returnItem(String itemId, String memberId) throws ItemNotFoundException, MemberNotFoundException, ItemNotBorrowedByMemberException{
         LibraryItem item = findItemById(itemId);
         Member member = findMemberById(memberId);
 
         if (item == null) throw new ItemNotFoundException(itemId);
         
         if (member == null) throw new MemberNotFoundException(memberId);
+
+        if (!member.getBorrowedItems().contains(itemId)) {
+            throw new ItemNotBorrowedByMemberException(member.getName(), itemId);
+        }
 
         item.returnItem();
         member.returnItem(itemId);

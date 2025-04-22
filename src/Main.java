@@ -71,7 +71,7 @@ public class Main {
                     String returnerId = InputHandler.getValidatedNumericInput("Enter your member ID: ");
                     try{
                         manager.returnItem(returnId, returnerId);
-                    } catch(ItemNotFoundException | MemberNotFoundException e ){
+                    } catch(ItemNotFoundException | MemberNotFoundException | ItemNotBorrowedByMemberException e ){
                         System.out.println("Error: " + e.getMessage());
                     }
                     break;
