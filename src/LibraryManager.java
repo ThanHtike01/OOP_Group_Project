@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import exception.*;
+
 //Core logic handler of the system.
 public class LibraryManager {
     private List<LibraryItem> items; // List to store books and school books
@@ -49,26 +51,18 @@ public class LibraryManager {
     }
 
     // Allow member to borrow item if conditions are met
-    public void borrowItem(String itemId, String memberId) {
+    public void borrowItem(String itemId, String memberId) throws Exception{
         LibraryItem item = findItemById(itemId);
         Member member = findMemberById(memberId);
 
-        if (item == null) {
-            System.out.println("Item not found.");
-            return;
-        }
-        if (member == null) {
-            System.out.println("Member not found.");
-            return;
-        }
-        if (!item.isAvailable()) {
-            System.out.println("Item is already borrowed.");
-            return;
-        }
-        if (member.getBorrowedItems().size() >= 5) {
-            System.out.println("Borrow limit reached. A member can only borrow up to 5 items.");
-            return;
-        }
+        if (item == null) throw new ItemNotFoundException(itemId);
+        
+        if (member == null) throw new MemberNotFoundException(memberId);
+
+        if (!item.isAvailable()) throw new ItemAlreadyBorrowedException(item.getTitle());
+
+        if (member.getBorrowedItems().size() >= 5) 
+            throw new BorrowLimitExceededException(member.getName());
 
         item.borrow();
         member.borrowItem(itemId);
@@ -76,19 +70,13 @@ public class LibraryManager {
     }
 
     // Allow a member to return borrowed item
-    public void returnItem(String itemId, String memberId) {
+    public void returnItem(String itemId, String memberId) throws ItemNotFoundException, MemberNotFoundException{
         LibraryItem item = findItemById(itemId);
         Member member = findMemberById(memberId);
 
-        if (item == null || member == null) {
-            System.out.println("Invalid item or member ID.");
-            return;
-        }
-
-        if (!member.getBorrowedItems().contains(itemId)) {
-            System.out.println("Item " + item.getId() + " was not borrowed by " + member.getName());
-            return;
-        }
+        if (item == null) throw new ItemNotFoundException(itemId);
+        
+        if (member == null) throw new MemberNotFoundException(memberId);
 
         item.returnItem();
         member.returnItem(itemId);
@@ -156,12 +144,9 @@ public class LibraryManager {
     }
 
     //Delete a book only if it is not currently borrowed
-    public void deleteBook(String bookId) {
-        LibraryItem item = findItemById(bookId);
-        if (item == null) {
-            System.out.println("Book not found.");
-            return;
-        }
+    public void deleteBook(String itemId) throws ItemNotFoundException {
+        LibraryItem item = findItemById(itemId);
+        if (item == null) throw new ItemNotFoundException(itemId);
 
         if (!item.isAvailable()) {
             System.out.println("Cannot delete a borrowed book.");
@@ -173,12 +158,9 @@ public class LibraryManager {
     }
 
     // Delete a member only if they have no borrowed items
-    public void deleteMember(String memberId) {
+    public void deleteMember(String memberId) throws MemberNotFoundException {
         Member member = findMemberById(memberId);
-        if (member == null) {
-            System.out.println("Member not found.");
-            return;
-        }
+        if (member == null) throw new MemberNotFoundException(memberId);
 
         if (!member.getBorrowedItems().isEmpty()) {
             System.out.println("Member has borrowed items. Return them first.");

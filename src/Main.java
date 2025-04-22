@@ -1,3 +1,5 @@
+import exception.*;
+
 // Main class / entry point
 public class Main {
     public static void main(String[] args) {
@@ -56,14 +58,22 @@ public class Main {
                     manager.showMemberList();
                     String borrowId = InputHandler.getValidatedNumericInput("Enter item ID to borrow: ");
                     String borrowerId = InputHandler.getValidatedNumericInput("Enter your member ID: ");
-                    manager.borrowItem(borrowId, borrowerId);
+                    try{
+                        manager.borrowItem(borrowId, borrowerId);
+                    } catch(Exception e){
+                        System.out.println("Error: " + e.getMessage());
+                    }
                     break;
 
                 case 5:
                     manager.showMemberList();
                     String returnId = InputHandler.getValidatedNumericInput("Enter item ID to return: ");
                     String returnerId = InputHandler.getValidatedNumericInput("Enter your member ID: ");
-                    manager.returnItem(returnId, returnerId);
+                    try{
+                        manager.returnItem(returnId, returnerId);
+                    } catch(ItemNotFoundException | MemberNotFoundException e ){
+                        System.out.println("Error: " + e.getMessage());
+                    }
                     break;
 
                 case 6:
@@ -77,13 +87,22 @@ public class Main {
                 case 8:
                     manager.showMemberList();
                     String delMemberId = InputHandler.getValidatedNumericInput("Enter member ID to delete: ");
-                    manager.deleteMember(delMemberId);
+                    try{
+                        manager.deleteMember(delMemberId);
+                    } catch(MemberNotFoundException e ){
+                        System.out.println("Error: " + e.getMessage());
+                    }
+                    
                     break;
 
                 case 9:
                     manager.showBookList();
                     String delBookId = InputHandler.getValidatedNumericInput("Enter book ID to delete: ");
-                    manager.deleteBook(delBookId);
+                    try{
+                        manager.deleteBook(delBookId);
+                    } catch(ItemNotFoundException e ){
+                        System.out.println("Error: " + e.getMessage());
+                    }
                     break;
 
                 case 10:
